@@ -5,7 +5,7 @@
 #include "sqlite3.h"
 using namespace std;
 
-// Implement the member functions here
+// Implement the functions here
 
 Patient* patientLogin() {
     cout << "Welcome !" << endl;

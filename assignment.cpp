@@ -72,7 +72,6 @@ int main(int argc, char** argv) {
                             cin >> choice;
 
                             if (choice == 1){
-                                // Use prepared statements to avoid SQL injection
                                 sqlite3_stmt* stmt;
                                 string sql = "INSERT INTO PAYMENT (PAYMENT_DATE, PAYMENT_STATUS, PAYMENT_METHOD, AMOUNT) VALUES (?, ?, ?, ?);";
 
@@ -84,7 +83,6 @@ int main(int argc, char** argv) {
                                     return (-1);
                                 }
 
-                                // Bind parameters to the statement
                                 sqlite3_bind_text(stmt, 1, PAYMENT_DATE.c_str(), -1, SQLITE_STATIC);
                                 sqlite3_bind_text(stmt, 2, PAYMENT_STATUS.c_str(), -1, SQLITE_STATIC);
                                 sqlite3_bind_text(stmt, 3, PAYMENT_METHOD.c_str(), -1, SQLITE_STATIC);
@@ -103,7 +101,7 @@ int main(int argc, char** argv) {
                                 sqlite3_finalize(stmt);
                                 cout << "Record created successfully!" << endl;
                                 
-                                // Display invoice for the last inserted patient (you can replace it with user input or other logic)
+                                
                                     int lastInsertedPaymentId = sqlite3_last_insert_rowid(DB);
 
                                     displayInvoice(DB, lastInsertedPaymentId);
@@ -120,7 +118,7 @@ int main(int argc, char** argv) {
                                         cout << "Invalid choice." << endl;
                                         cout << endl;
                                     }
-                         } while (choice != 1 && choice != 2); // Repeat the loop until a valid choice is made   
+                         } while (choice != 1 && choice != 2); 
                 // Make Appointment
                 }else if (choice == 2) {
 
@@ -167,7 +165,6 @@ int main(int argc, char** argv) {
                             cin >> choice;
 
                             if (choice == 1){
-                                // Use prepared statements to avoid SQL injection
                                 sqlite3_stmt* stmt;
                                 string sql = "INSERT INTO APPOINTMENT (APPOINT_DOCTOR, APPOINT_SPECIALTY, APPOINT_DATETIME) VALUES (?, ?, ?);";
                                
@@ -180,7 +177,7 @@ int main(int argc, char** argv) {
                                     return (-1);
                                 }
 
-                                // Bind parameters to the statement
+                                
                                 sqlite3_bind_text(stmt, 1, APPOINT_DOCTOR.c_str(), -1, SQLITE_STATIC);
                                 sqlite3_bind_text(stmt, 2, APPOINT_SPECIALTY.c_str(), -1, SQLITE_STATIC);
                                 sqlite3_bind_text(stmt, 3, APPOINT_DATETIME.c_str(), -1, SQLITE_STATIC);
@@ -199,7 +196,7 @@ int main(int argc, char** argv) {
                                 
                                 cout << "Record created successfully!" << endl;
                                 
-                                // Display invoice for the last inserted patient (you can replace it with user input or other logic)
+                                
                                     int lastInsertedAppointId = sqlite3_last_insert_rowid(DB);
                                     displayAppointment(DB, lastInsertedAppointId);
                                     sqlite3_close(DB);
@@ -243,8 +240,7 @@ int main(int argc, char** argv) {
                 cin >> PASSWORD;
                 cout << "Enter your role (doctor/nurse): ";
                 cin >> ROLE;
-                        
-                // Clear input buffer
+                    
                 cin.sync();
 
                 loggedIn = authenticateUser(db, USERNAME, PASSWORD, ROLE);
@@ -301,7 +297,6 @@ int main(int argc, char** argv) {
 
                                 if (result == SQLITE_OK) {
                                     cout << "\nMedical record created successfully!" << endl;
-                                    // Display invoice for the last inserted patient
                                     int lastInsertedMRId = sqlite3_last_insert_rowid(db);
                                     displayMedical_Record(db, lastInsertedMRId);
                                     sqlite3_close(db);
@@ -644,7 +639,6 @@ int main(int argc, char** argv) {
 
                                 if (result == SQLITE_OK) {
                                     cout << "\nLab record created successfully!" << endl;
-                                    // Display invoice for the last inserted patient
                                     int lastInsertedLRId = sqlite3_last_insert_rowid(db);
                                     displayLab_Record(db, lastInsertedLRId);
                                     sqlite3_close(db);
@@ -1005,7 +999,6 @@ int main(int argc, char** argv) {
 
                                 if (result == SQLITE_OK) {
                                     cout << "\nDrugs Details created successfully!" << endl;
-                                    // Display invoice for the last inserted patient
                                     int lastInsertedDrugsId = sqlite3_last_insert_rowid(db);
                                     displayDrugsDetails(db, lastInsertedDrugsId);
                                     sqlite3_close(db);
@@ -1260,7 +1253,6 @@ int main(int argc, char** argv) {
 
                                 if (result == SQLITE_OK) {
                                     cout << "\nEquipment Details created successfully!" << endl;
-                                    // Display invoice for the last inserted patient
                                     int lastInsertedEquipDetailsId = sqlite3_last_insert_rowid(db);
                                     displayEquipmentDetails(db, lastInsertedEquipDetailsId);
                                     sqlite3_close(db);
@@ -1279,7 +1271,7 @@ int main(int argc, char** argv) {
                         
                         }else if(edChoice == 3){ //update
                             cout << "**************************************" << endl;
-                            cout << "*              Update                *" << endl;
+                            cout << "*              Update                *" << endl
                             cout << "**************************************" << endl;
                             cout << "*       1. Equipment Name            *" << endl;
                             cout << "*       2. Equipment Catergory       *" << endl;
@@ -1557,8 +1549,7 @@ int main(int argc, char** argv) {
                             result = createInventoryDetails(db, I_QUANTITY, I_NAME, I_CATERGORY,I_PDATE,I_EXPDATE);
 
                                 if (result == SQLITE_OK) {
-                                    cout << "\nInventory Details created successfully!" << endl;
-                                    // Display invoice for the last inserted patient
+                                    cout << "\nInventory Details created successfully!" << endl
                                     int lastInsertedIntdetailsId = sqlite3_last_insert_rowid(db);
                                     displayInventoryDetails(db, lastInsertedIntdetailsId);
                                     sqlite3_close(db);
@@ -1854,8 +1845,7 @@ int main(int argc, char** argv) {
                             result = createOnCall(db, BLOCK_FLOOR, ROOM_NAME, ON_CALL_START, ON_CALL_END);
 
                                 if (result == SQLITE_OK) {
-                                    cout << "\nOn Call created successfully!" << endl;
-                                    // Display invoice for the last inserted patient
+                                    cout << "\nOn Call created successfully!" << endl
                                     int lastInsertedOnCallId = sqlite3_last_insert_rowid(db);
                                     displayOnCall(db, lastInsertedOnCallId);
                                     sqlite3_close(db);
@@ -2110,7 +2100,6 @@ int main(int argc, char** argv) {
 
                                 if (result == SQLITE_OK) {
                                     cout << "\nVisit details created successfully!" << endl;
-                                    // Display invoice for the last inserted patient
                                     int lastInsertedVisitDetailsId = sqlite3_last_insert_rowid(db);
                                     displayVisitDetails(db, lastInsertedVisitDetailsId);
                                     sqlite3_close(db);

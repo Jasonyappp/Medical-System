@@ -37,7 +37,7 @@ int createMedicalRecord(sqlite3 *db, const string &PATIENT_NAME, const string &D
 }
 
 int deleteMedicalRecord(sqlite3* db, int MR_ID) {
-    // Assuming that MR_ID is an integer, and you want to delete records based on MR_ID
+    // Delete records based on MR_ID
     sqlite3_stmt* stmt;
     string sql = "DELETE FROM MEDICAL_RECORD WHERE MR_ID = ?;";
     int result = sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, 0);
